@@ -1,0 +1,9 @@
+/* Import the Google font - Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Doto&family=Montserrat:wght@100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", serif;
+}
