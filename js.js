@@ -31,7 +31,7 @@ const displayHourlyForecast = (hourlyData) =>{
 
         return `<li class="weather-item">
                         <p class="time">${time}</p>
-                        <img src="icons${weatherIcon}.svg" class="weather-icon">
+                        <img src="icons/${weatherIcon}.svg" class="weather-icon">
                         <p class="temperature">${temperature}°</p>
                     </li>`
     }).join("");
