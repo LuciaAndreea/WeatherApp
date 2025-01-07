@@ -13,6 +13,18 @@ const weatherCodes = {
     thunder_rain: [1273, 1276],
 }
 
+const displayHourlyForecast = (hourlyData) =>{
+    const currentHour = new Date().setMinutes(0,0,0);
+    const next24Hours = currentHour + 24 * 60 * 60 * 1000;
+
+    const newxt24HoursData = hourlyData.filter(({ time }) =>{
+        const forecastTime = new Date(time).getTime();
+        return forecastTime >= currentHour && forecastTime <= next24Hours;
+    });
+
+    console.log(newxt24HoursData);
+}
+
 const getWeatherDetails = async (cityName) =>{
     const API_URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityName}&days=2`;
 
@@ -34,7 +46,7 @@ const getWeatherDetails = async (cityName) =>{
 
       //Combine the hourly data for 2 days (today and tomorrow)
       const combinedHourlyData = [...data.forecast.forecastday[0].hour, ...data.forecast.forecastday[1].hour];
-      console.log(combinedHourlyData);
+      displayHourlyForecast(combinedHourlyData);
     } catch(error){
         console.log(error);
     }
