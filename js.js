@@ -26,7 +26,7 @@ const displayHourlyForecast = (hourlyData) =>{
     // generate HTML for every hour and display it
     hourlyWeatherDiv.innerHTML = newxt24HoursData.map(item =>{
         const temperature = Math.floor(item.temp_c);
-        const time = item.time;
+        const time = item.time.split(" ")[1].substring(0, 5);
         const weatherIcon = Object.keys(weatherCodes).find(icon => weatherCodes[icon].includes(item.condition.code));
 
         return `<li class="weather-item">
