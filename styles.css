@@ -107,7 +107,7 @@ body{
     transform: translate(-50%, -50%);
 }
 
-body .show-no-result .no-result{
+body.show-no-result .no-result{
     display: flex;
 }
 
