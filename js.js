@@ -1,4 +1,5 @@
 const searchInput = document.querySelector(".search-input");
+const locationButton = document.querySelector(".location-button");
 const currentWeatherDiv = document.querySelector(".current-weather");
 const hourlyWeatherDiv = document.querySelector(".hourly-weather .weather-list");
 const API_KEY = "79493d26b5364e3fb1695446242211";
@@ -37,9 +38,7 @@ const displayHourlyForecast = (hourlyData) =>{
     }).join("");
 }
 
-const getWeatherDetails = async (cityName) =>{
-    const API_URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityName}&days=2`;
-
+const getWeatherDetails = async (API_URL) =>{
     try{
       const response = await fetch(API_URL);
       const data = await response.json();
@@ -64,12 +63,28 @@ const getWeatherDetails = async (cityName) =>{
     }
 }
 
+const setupWeatherRequest = (cityName) =>{
+    const API_URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityName}&days=2`;
+    getWeatherDetails(API_URL);
+}
+
 //show the city on console when enter is clicked
 searchInput.addEventListener("keyup" , (e) =>{
     // using trim() to remove extra whitespaces
     const cityName = searchInput.value.trim();
 
     if(e.key == "Enter" && cityName){
-        getWeatherDetails(cityName);
+       setupWeatherRequest(cityName)
     }
+});
+
+//Providing the users current geographic location
+locationButton.addEventListener("click", () =>{
+    navigator.geolocation.getCurrentPosition(position =>{
+        const {latitude, longitude} = position.coords;
+        const API_URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${latitude},${longitude}&days=2`;
+        getWeatherDetails(API_URL);
+    }, error =>{
+        alert("Location acces denied. Please enable permissions to use this feature.")
+    })
 })
