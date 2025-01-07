@@ -39,6 +39,8 @@ const displayHourlyForecast = (hourlyData) =>{
 }
 
 const getWeatherDetails = async (API_URL) =>{
+    window.innerWidth <= 768 && searchInput.blur();
+
     try{
       const response = await fetch(API_URL);
       const data = await response.json();
@@ -58,6 +60,8 @@ const getWeatherDetails = async (API_URL) =>{
       //Combine the hourly data for 2 days (today and tomorrow)
       const combinedHourlyData = [...data.forecast.forecastday[0].hour, ...data.forecast.forecastday[1].hour];
       displayHourlyForecast(combinedHourlyData);
+
+      searchInput.value =data.location.name;
     } catch(error){
         console.log(error);
     }
