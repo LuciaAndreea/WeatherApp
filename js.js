@@ -91,5 +91,8 @@ locationButton.addEventListener("click", () =>{
         getWeatherDetails(API_URL);
     }, error =>{
         alert("Location acces denied. Please enable permissions to use this feature.")
-    })
-})
+    });
+});
+
+
+setupWeatherRequest("bucharest");
