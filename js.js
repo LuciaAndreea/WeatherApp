@@ -1,4 +1,5 @@
 const searchInput = document.querySelector(".search-input");
+const currentWeatherDiv = document.querySelector(".current-weather");
 const API_KEY = "79493d26b5364e3fb1695446242211";
 
 const getWeatherDetails = async (cityName) =>{
@@ -8,6 +9,14 @@ const getWeatherDetails = async (cityName) =>{
       const response = await fetch(API_URL);
       const data = await response.json();
 
+      // Extract current weather details
+      const temperature = data.current.temp_c;
+      const description = data.current.condition.text;
+
+
+      //Update the weather in real time
+      currentWeatherDiv.querySelector(".temperature").innerHTML = `${temperature}<span>°C</span>`;
+      currentWeatherDiv.querySelector(".description").innerHTML = description;
       console.log(data);
     } catch(error){
         console.log(error);
