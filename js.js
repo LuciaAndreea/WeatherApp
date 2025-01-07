@@ -1,5 +1,6 @@
 const searchInput = document.querySelector(".search-input");
 const currentWeatherDiv = document.querySelector(".current-weather");
+const hourlyWeatherDiv = document.querySelector(".hourly-weather .weather-list");
 const API_KEY = "79493d26b5364e3fb1695446242211";
 
 const weatherCodes = {
@@ -22,7 +23,18 @@ const displayHourlyForecast = (hourlyData) =>{
         return forecastTime >= currentHour && forecastTime <= next24Hours;
     });
 
-    console.log(newxt24HoursData);
+    // generate HTML for every hour and display it
+    hourlyWeatherDiv.innerHTML = newxt24HoursData.map(item =>{
+        const temperature = Math.floor(item.temp_c);
+        const time = item.time;
+        const weatherIcon = Object.keys(weatherCodes).find(icon => weatherCodes[icon].includes(item.condition.code));
+
+        return `<li class="weather-item">
+                        <p class="time">${time}</p>
+                        <img src="icons${weatherIcon}.svg" class="weather-icon">
+                        <p class="temperature">${temperature}°</p>
+                    </li>`
+    }).join("");
 }
 
 const getWeatherDetails = async (cityName) =>{
@@ -36,7 +48,7 @@ const getWeatherDetails = async (cityName) =>{
       const temperature = Math.floor(data.current.temp_c); // remove the decimal point
       const description = data.current.condition.text;
       //Finds the key in weatherCodes that matches the item.conditon.code
-      const weatherIcon = Object.keys(weatherCodes).find(icon => weatherCodes[icon].includes(data.current.condition.code))
+      const weatherIcon = Object.keys(weatherCodes).find(icon => weatherCodes[icon].includes(data.current.condition.code));
 
 
       //Update the weather in real time
