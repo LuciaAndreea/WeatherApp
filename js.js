@@ -14,7 +14,7 @@ const weatherCodes = {
 }
 
 const getWeatherDetails = async (cityName) =>{
-    const API_URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityName}`;
+    const API_URL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${cityName}&days=2`;
 
     try{
       const response = await fetch(API_URL);
@@ -31,7 +31,10 @@ const getWeatherDetails = async (cityName) =>{
       currentWeatherDiv.querySelector(".weather-icon").src = `icons/${weatherIcon}.svg`;
       currentWeatherDiv.querySelector(".temperature").innerHTML = `${temperature}<span>°C</span>`;
       currentWeatherDiv.querySelector(".description").innerHTML = description;
-      console.log(data);
+
+      //Combine the hourly data for 2 days (today and tomorrow)
+      const combinedHourlyData = [...data.forecast.forecastday[0].hour, ...data.forecast.forecastday[1].hour];
+      console.log(combinedHourlyData);
     } catch(error){
         console.log(error);
     }
