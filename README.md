@@ -6,7 +6,7 @@ This project is a simple yet effective Weather API Web Application built using J
 
 ✔️ Fetches real-time weather data using fetch() and a weather API (e.g., OpenWeatherMap).
 
-✔️ Displays key weather details (temperature, humidity, wind speed, conditions, etc.).
+✔️ Displays key weather details (temperature, conditions, etc.).
 
 ✔️ Search functionality for cities worldwide.
 
