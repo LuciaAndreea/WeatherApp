@@ -1,5 +1,8 @@
 🌦️ Weather API Web App
 
+Live Demo
+🔗 [View the Project](https://weather-app-iota-peach-83.vercel.app)
+
 This project is a simple yet effective Weather API Web Application built using JavaScript, HTML, and CSS. It leverages the fetch() API to retrieve real-time weather data from an external weather service, providing users with accurate temperature, humidity, and forecast details for any location worldwide.
 
 🚀 Features
